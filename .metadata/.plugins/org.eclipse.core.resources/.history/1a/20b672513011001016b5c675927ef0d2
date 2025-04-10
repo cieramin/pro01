@@ -1,0 +1,27 @@
+package com.dunkin.app.controller;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.dunkin.app.service.BoardService;
+
+@Controller
+public class BoardController { //Thymeleaf
+	private final BoardService boardService;
+
+	public BoardController(BoardService boardService) {
+		this.boardService = boardService;
+	}
+	public String getAllBoards(Model model) {
+		model.addAttribute("boards", boardService.getAllBoard());
+		return "board-list";
+	}
+	public String getBoard(@PathVariable("no") Long no) {
+		model.addAttribute("board",boardService.getBoardById(no));
+		return "board-detail";
+	}
+	
+}

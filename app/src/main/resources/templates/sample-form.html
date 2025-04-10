@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>샘플 등록</title>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<th:block th:replace="fragments/header :: script"></th:block>
+		<th:block th:replace="fragments/header :: link"></th:block>
+	</head>
+	<body>
+		<divs="container">	
+			<th:block th:replace="fragments/header :: header"></th:block>
+		    <hr>
+			<div>
+					배너
+				</div>
+				<div class="first-content">
+					<nav aria-label="breadcrumb">
+					  <ol class="breadcrumb">
+					    <li class="breadcrumb-item"><a href="/">Home</a></li>
+					    <li class="breadcrumb-item"><a href="/sample/list">Sample</a></li>
+					    <li class="breadcrumb-item active" aria-current="page">Form</li>
+					  </ol>
+					</nav>
+				</div>
+		<div class="container">
+			<h2 class="mt-4">샘플 추가</h2>
+			<hr>
+			<form th:action="@{/sample/save}" th:object="${sample}" method="post">
+				<div class="mb-3">
+					<label class="form-label">이름</label>
+					<input type="text" class="form-control" th:field="*{name}" required>
+				</div>
+				<div class="mb-3">
+					
+				</div>
+				<button type="submit" class="btn btn-success">등록</button>
+				<a href="/sample/list" class="btn btn-primary">목록</a>
+			</form>
+		</div>
+	</div>
+	<th:block th:replace="fragments/footer :: footer"></th:block>
+	</body>
+</html>

@@ -1,0 +1,58 @@
+package com.dunkin.app.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.dunkin.app.entity.Board;
+import com.dunkin.app.repository.BoardRepository;
+
+@Service
+public class BoardService {
+	private final BoardRepository boardRepository;
+
+	public BoardService(BoardRepository boardRepository) {
+		this.boardRepository = boardRepository;
+	}
+	
+	//게시판 목록
+	public List<Board> getAllBoard() {
+		return boardRepository.findAll();
+	}
+	
+	//게시판 1건조회
+	public Board getBoardById(Long no) {
+		Board board=boardRepository.findById(no).orElseThrow(() -> new RuntimeException());
+		board.setHits(board.getHits()+1);
+		boardRepository.save(board);
+		return board;
+	}
+	
+	public void increaseHits(Long no) {
+		Board board=getBoardById(no);
+		board.setHits(board.getHits()+1);
+		boardRepository.save(board);
+	}
+	
+	//게시판 1건 조회
+	public Optional<Board> getBoardByNo(Long no) {	
+		return boardRepository.findById(no);
+	}
+	
+	//게시판 글 추가
+	public Board saveBoard(Board board) {	
+		return boardRepository.save(board);  		//board.setResdate(LocalDateTime.now());
+	}
+	
+	//게시판 글수정
+	public Board updateBoard(Board board) {
+		return boardRepository.save(board);
+	}
+	
+	//게시판 글삭제
+	public void deleteBoard(Long no) {
+		boardRepository.deleteById(no);
+	}
+	
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>제품 등록</title>
+	<th:block th:replace="fragments/header :: link"></th:block>
+	<th:block th:replace="fragments/header :: script"></th:block>
+	<th:block th:replace="fragments/header :: style"></th:block>
+</head>
+
+<body>
+	<th:block th:replace="fragments/header :: header"></th:block>
+	<div class="container">
+		<hr>
+		<div>
+			배너
+		</div>
+		<div class="first-content">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/">Home</a></li>
+					<li class="breadcrumb-item"><a href="">제품</a></li>
+					<li class="breadcrumb-item active" aria-current="page">제품등록</li>
+				</ol>
+			</nav>
+		</div>
+		<tr class="container">
+			<h2 class="mt-4">제품등록</h2>
+			<hr>
+			<form th:action="@{/product/new}" th:object="${product}" method="post" enctype="multipart/form-data">
+				<div class="mb-3">
+					<label class="form-label" for="cate">카테고리</label>
+					<select id="cate" th:field="*{cate}" class="form-control">
+						<option value="">선택안함</option>
+						<option value="EYE">EYE</option>
+						<option value="LIP">LIP</option>
+						<option value="FACE">FACE</option>
+						<option value="SKINCARE">SKINCARE</option>
+					</select>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" for="id">제품명</label>
+					<input type="text" class="form-control" id="pname" name="id" th:field="*{pname}" maxlength="200" required>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="pw">제품설명</label><br>
+					<textarea rows="5" cols="80" id="comment" class="form-control" th:field="*{comment}" required></textarea>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="pw">입고가격</label><br>
+					<input type="number" class="form-control" id="price1" min="1000" step="10" value="1000" th:field="*{price1}" required>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="pw">출고가격</label><br>
+					<input type="number" class="form-control" id="price2" min="1000" step="10" value="1300" th:field="*{price2}" required>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="pw">수량</label><br>
+					<input type="number" class="form-control" id="amount" min="1" step="1" value="1" th:field="*{amount}" required>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="pw">메인이미지</label><br>
+					<input type="file" id="img1" accept=".jpg, .jpeg, .png, .gif, .webp" class="form-control" th:field="*{img1}" name="pic1" required>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="pw">서브이미지</label><br>
+					<input type="file" id="img2" accept=".jpg, .jpeg, .png, .gif, .webp" class="form-control" th:field="*{img2}" name="pic2" required>
+				</div>
+				<div class="mb-3">
+
+				</div>
+				<button type="submit" class="btn btn-success">등록</button>
+				<a href="/board/list" class="btn btn-primary">목록</button>
+			</form>
+	</div>
+	</div>
+	<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>

@@ -1,0 +1,54 @@
+package com.dunkin.app.service;
+
+import java.awt.print.Pageable;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
+
+import com.dunkin.app.entity.Qna;
+import com.dunkin.app.repository.QnaRepository;
+
+@Service
+public class QnaService {
+	private final QnaRepository qnaRepository;
+	public QnaService(QnaRepository qnaRepository) {
+		this.qnaRepository=qnaRepository;
+	}
+	
+	//목록조회
+	public List<Qna> getAllQnas() {
+		return qnaRepository.findAllByOrderByParnoDescNoAsc();
+	}
+	
+	//질문및 답변글 한건만 조회
+	public Qna findByNo(Long no) {
+		return qnaRepository.findById(no).orElse(null);
+	}
+	 
+	//글 추가
+	public Qna save(Qna qna) {
+		 return qnaRepository.save(qna);
+	 }
+	
+	//글 수정
+	 public Qna update(Qna qna) {
+		 return qnaRepository.save(qna);
+	 }
+	
+	//답변 글만 삭제
+	 public void delete(Long no) {
+		 qnaRepository.deleteById(no);
+	 }
+	 
+	 //질문삭제시 해당답변도 연쇄삭제
+	 public void deleteByParno(Long parno) {
+		 qnaRepository.deleteByParno(parno);
+	 }
+	 
+	//질문글 상세보기
+	 public List<Qna> findReplies(Long parno) {
+		 return qnaRepository.findByParno(parno);
+	 }
+	
+}

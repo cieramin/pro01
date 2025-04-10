@@ -1,0 +1,45 @@
+package com.dunkin.app.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.dunkin.app.entity.Product;
+import com.dunkin.app.repository.ProductRepository;
+
+@Service
+public class ProductService {
+	private final ProductRepository productRepository;
+
+	public ProductService(ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
+	
+	//제품목록
+	public List<Product> findAll() {
+		return productRepository.findAll();
+	}
+	
+	//제품 1건조회
+	public Product findById(Long no) {
+		return productRepository.findById(no).orElse(null);
+	}
+	
+	//제품등록
+	public Product save(Product product) {
+		return productRepository.save(product);
+	}
+	
+	//제품정보 변경
+	public Product update(Product product) {
+		return productRepository.save(product);
+	}
+	
+	//제품삭제 
+	public void delete(Long no) {
+		productRepository.deleteById(no);
+	}
+	
+	
+	
+}

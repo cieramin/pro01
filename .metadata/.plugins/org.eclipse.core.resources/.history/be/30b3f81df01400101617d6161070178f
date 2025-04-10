@@ -1,0 +1,12 @@
+package com.dunkin.app.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.dunkin.app.entity.Qna;
+
+public interface QnaRepository extends JpaRepository<Qna, Long>{
+	List<Qna> findByLevel(int level);
+	List<Qna> findByParno(Long Parno);
+	List<Qna> findAllByOrderByParnoDescNoAsc(); //정렬->parno는 내림차순, no는 오름차순
+	List<Qna> deleteByParno(Long parno); //질문삭제(연쇄삭제)
+}

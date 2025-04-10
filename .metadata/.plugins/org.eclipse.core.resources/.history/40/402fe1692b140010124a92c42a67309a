@@ -1,0 +1,5 @@
+package com.dunkin.app.entity;
+
+public class Product {
+
+}

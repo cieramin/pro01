@@ -1,0 +1,55 @@
+package com.dunkin.app.service;
+
+import java.awt.print.Pageable;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
+
+import com.dunkin.app.entity.Qna;
+import com.dunkin.app.repository.QnaRepository;
+
+@Service
+public class QnaService {
+	private final QnaRepository qnaRepository;
+	public QnaService(QnaRepository qnaRepository) {
+		this.qnaRepository=qnaRepository;
+	}
+	
+	public List<Qna> getAllQnas() {
+		return qnaRepository.findAll();
+	}
+	
+	 public Page<Qna> getQnaList(Pageable pageable) {
+		 return qnaRepository.findAll(pageable);
+	 }
+	 
+	 public Qna getQnaById(Long no) {
+		 Qna qna= qnaRepository.findById(no).orElse(null);
+		 return qna;
+	 }
+	 
+	 public void increaseHits(Long no) {
+		 Qna qna=getQnaById(no);
+		 qna.setHits(qna.getHits()+1);
+		 qnaRepository.save(qna);
+	 }
+	
+	 public Optional<Qna> getQnaByNo(Long no) {
+		 return qnaRepository.findById(no);
+	 }
+	 
+	 public Qna saveQna(Qna qna) {
+		 return qnaRepository.save(qna);
+	 }
+	 
+	 public Qna updateQna(Qna qna) {
+		 return qnaRepository.save(qna);
+	 }
+	 
+	 public void deleteQna(Long no) {
+		 qnaRepositroy.delteById(no);
+	 }
+	 
+	
+}

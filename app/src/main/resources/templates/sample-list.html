@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<th:block th:replace="fragments/header :: script"></th:block>
+	<th:block th:replace="fragments/header :: link"></th:block>
+	<title>샘플목록</title>
+</head>
+<body>
+    <div class="container">	
+		<th:block th:replace="fragments/header :: header"></th:block>
+		<hr>
+		<div>
+			배너
+		</div>
+		<div class="first-content">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a href="/">Home</a></li>
+			    <li class="breadcrumb-item"><a href="/sample/list">Sample</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">List</li>
+			  </ol>
+			</nav>
+		</div>
+		<div class="container">
+					<h2 class="mt-4">샘플 목록</h2>
+					<hr>
+					<a href="/sample/ins" class="btn btn-primary">샘플추가</a>
+					<hr>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>Name</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>   
+							<tr th:each="sam : ${samples}">
+								<td th:text="${sam.no}"></td>
+								<td th:text="${sam.name}"></td>
+								<td>
+									<a th:href="@{/sample/detail/{no}(no=${sam.no})}" class="btn btn-primary">자세히 보기</a>
+									<a th:href="@{/sample/edit/{no}(no=${sam.no})}" class="btn btn-warning">수정</a>
+									<a th:href="@{/sample/delete/{no}(no=${sam.no})}" class="btn btn-danger">삭제</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+    </div>
+	<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>
